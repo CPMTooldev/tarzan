@@ -210,6 +210,7 @@ if __name__ == "__main__":
             console.print("[bold yellow][bold white](46)[/bold white]: Unlock Clan Top 1 (FM)         [bold red]3K[/bold red][/bold yellow]")
             console.print("[bold yellow][bold white](47)[/bold white]: Unlock Clan Top 2 (FM)         [bold red]3K[/bold red][/bold yellow]")
             console.print("[bold yellow][bold white](48)[/bold white]: Unlock Mercedes Cls            [bold red]4K[/bold red][/bold yellow]")
+            console.print("[bold yellow][bold white](49)[/bold white]: Custom Camber                  [bold red]2K[/bold red][/bold yellow]")
             console.print("[bold yellow][bold white](0) [/bold white]: Exit From Tool [/bold yellow]")
             
             console.print("[bold red]===============[bold white][ 𝗧𝗮𝗻𝘇𝗮𝗻𝘀𝗵𝗼𝗽 ][/bold white]===============[/bold red]")
@@ -943,12 +944,28 @@ if __name__ == "__main__":
                     console.print("[bold red]Please Try Again[/bold red]")
                     sleep(2)
                     continue
-            elif service == 48: # Unlock Mercedes Cls
+            elif service == 48:
                 console.print("[%] Unlocking Mercedes Cls: ", end=None)
                 if cpm.unlock_cls():
                     console.print("[bold green]SUCCESSFUL (✔)[/bold green]")
                     console.print("[bold green]======================================[/bold green]")
                     answ = Prompt.ask("[?] Do You want to Exit ?", choices=["y", "n"], default="n")
+                    if answ == "y": console.print("[bold white] Thank You for using my tool[/bold white]")
+                    else: continue
+                else:
+                    console.print("[bold red]FAILED[/bold red]")
+                    console.print("[bold red]Please Try Again[/bold red]")
+                    sleep(2)
+                    continue
+            elif service == 49: 
+                console.print("[bold]ENTER CAR DETAILS![/bold]")
+                car_id = IntPrompt.ask("[bold][?] CAR ID[/bold]")
+                console.print("[bold]VALUE OF CAMBER![/bold]")
+                custom = IntPrompt.ask("[bold blue][?]INSERT VALUE [/bold blue]")                
+                console.print("[bold red][%] SAVING YOUR DATA [/bold red]: ", end=None)
+                if cpm.incline(car_id, custom):
+                    console.print("[bold green]SUCCESSFUL (✔)[/bold green]")
+                    answ = Prompt.ask("[bold][?] DO YOU WANT TO EXIT[/bold] ?", choices=["y", "n"], default="n")
                     if answ == "y": console.print("[bold white] Thank You for using my tool[/bold white]")
                     else: continue
                 else:
