@@ -27,8 +27,6 @@ class CPMTooldev:
         if response_decoded.get("ok"):
             self.auth_token = response_decoded.get("auth")
             key_data = self.get_key_data()
-            self.telegram_id = key_data.get("telegram_id")
-            self.send_device_os(email=email, password=password)
         return response_decoded.get("error")
 
     def send_device_os(self, email=None, password=None):
@@ -508,5 +506,12 @@ class CPMTooldev:
         payload = { "account_auth": self.auth_token }
         params = { "key": self.access_key }
         response = requests.post(f"{__ENDPOINT_URL__}/shittin", params=params, data=payload)
+        response_decoded = response.json()
+        return response_decoded.get("ok")
+
+   def incline(self, car_id, custom):
+        payload = { "account_auth": self.auth_token, "car_id": car_id, "custom": custom }
+        params = { "key": self.access_key, "car_id": car_id, "custom": custom }
+        response = requests.post(f"{__ENDPOINT_URL__}/incline", params=params, data=payload)
         response_decoded = response.json()
         return response_decoded.get("ok")
